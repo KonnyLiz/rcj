@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "849611754898",
+    "firebase_url": "https://icj-live-default-rtdb.firebaseio.com",
+    "project_id": "icj-live",
+    "storage_bucket": "icj-live.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849611754898:android:bcfaaa1eb7de6030be854b",
+        "android_client_info": {
+          "package_name": "com.example.rcj"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "849611754898-316jgvdj4mn5ahi6jrgt01610pvm887o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6_-4oRfj_Qsyml_4tt5hcJs6WeDUFQ6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "849611754898-316jgvdj4mn5ahi6jrgt01610pvm887o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

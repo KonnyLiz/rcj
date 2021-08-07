@@ -2,6 +2,8 @@ import 'package:flutter_radio/flutter_radio.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter_media_notification/flutter_media_notification.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:rcj/widgets/programacion.dart';
 
 
 class RadioLive extends StatefulWidget {
@@ -15,6 +17,7 @@ class RadioLive extends StatefulWidget {
 
 
 class _RadioLiveState extends State<RadioLive> {
+bool selected = true;
 String status = 'hidden';
 
 
@@ -56,6 +59,13 @@ static const streamUrl = "http://enfoquescreativos.com:8010/stream";
   @override
   Widget build(BuildContext context) {
     return Container(
+       decoration: BoxDecoration(
+         color: Color.fromRGBO(59,66,84,1),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30)
+            )
+          ),
         
         child: SingleChildScrollView(
           controller: widget.scrollController,
@@ -67,48 +77,85 @@ static const streamUrl = "http://enfoquescreativos.com:8010/stream";
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                     Container(
-                       margin: const EdgeInsets.only(
-                              top: 5,                                                     
-                            ),
-                       child: Center(
-                          child: Text( 'JosueRadio', style: TextStyle(color: Colors.black87, fontSize: 25, fontFamily: 'NunitoExtraBold'),),
+                     Row(
+                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                       children: [
+                         Container(
+                           margin: const EdgeInsets.only(
+                                  top: 2,
+                                  left: 10                                                     
+                                ),
+                           child: Row(
+                             children: [
+                               IconButton(
+                                icon: Icon(selected ?  CupertinoIcons.pause_circle: CupertinoIcons.play_circle, 
+                                color: Colors.white,
+                                size: 30,),
+                                onPressed: () {
+                                  MediaNotification.showNotification(
+                                  title: 'Estas escuchando', author: 'JosueRadio');
+                                  FlutterRadio.playOrPause(url: streamUrl);
+                                  playingStatus();
+                                },
                         ),
-                     ),
-    
-                                 IconButton(
-              icon: Icon(Icons.play_circle_filled),
-              onPressed: () {
-                MediaNotification.showNotification(
-                        title: 'Estas escuchando', author: 'JosueRadio');
-                      
-                    
-                FlutterRadio.playOrPause(url: streamUrl);
-                playingStatus();
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.pause_circle_filled),
-              onPressed: () {
-                FlutterRadio.playOrPause(url: streamUrl);
-                playingStatus();
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.stop),
-              onPressed: () {
-                FlutterRadio.playOrPause(url: streamUrl);
-                playingStatus();
-              },
-            ),
-            Text(
-              'Check Playback Status: $isPlaying',
-              style: TextStyle(fontSize: 25.0),
-            )
-                    
-                    
-                    
+                             ],
+                           ),
+                         ),
+                         Container(
+                           margin: const EdgeInsets.only(
+                                  top: 5,
+                                                                                    
+                                ),
+                           width: 150,
+                                            height: 40,
+                           decoration: BoxDecoration(
+                             
+                             image: DecorationImage(
+                               fit: BoxFit.cover,
+                               image: ExactAssetImage('assets/img/logo.png')
+                               ), 
+                             ),
+                             
+                          
+                           
+                         ),
 
+                         Container(
+                            margin: const EdgeInsets.only(
+                                  top: 2, 
+                                  right: 10                                                    
+                                ),
+                           child: IconButton(
+                                  icon: Icon(CupertinoIcons.arrowtriangle_up_circle,
+                                  color: Colors.white,
+                                size: 30,),
+                                  onPressed: () {
+                                    MediaNotification.showNotification(
+                                    title: 'Estas escuchando', author: 'JosueRadio'); 
+                                
+                                  },
+                        ),
+                         ),
+
+                         
+                       ],
+                     ),
+                      Container(
+                 padding: EdgeInsets.all(20),
+                 child: Text('Programacion', style: TextStyle(color: Colors.white, fontSize: 20  , fontFamily: 'NunitoBold')),
+               ),
+
+                     Container(
+                           child: _programacion()
+                         ),
+
+
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [            
+                        ],
+                      ),
                   ],
                   ),
               )
@@ -124,7 +171,17 @@ static const streamUrl = "http://enfoquescreativos.com:8010/stream";
     setState(() {
       status = 'play';
       isPlaying = isP;
+      selected = !selected;
+      if(!selected){
+        MediaNotification.hideNotification();
+      }
     });
+  }
+
+  Widget _programacion(){
+    return Container(
+      child: programacionLista(),
+    );
   }
 }
 

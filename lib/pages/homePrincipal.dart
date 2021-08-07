@@ -58,7 +58,6 @@ class _homePrincipalState extends State<homePrincipal> {
                           
                        _AnunciosHome(),
                           
-                      // _tarjeta()
                           
                      
                     ],

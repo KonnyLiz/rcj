@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:rcj/pages/biblia.dart';
 import 'package:rcj/pages/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:rcj/pages/menu2.dart';
 import 'package:rcj/pages/predicaspage.dart';
 import 'package:rcj/widgets/RadioLive.dart';
+import 'package:rcj/widgets/videolist.dart';
 
 
 
@@ -21,7 +23,7 @@ int _selectedIndex = 0;
 List<Widget> _opcionesMenu = <Widget>[
   HomePage(),
   PredicasPage(),
-  Text('Biblia'),
+  BibliaPage(),
   Text('Anuncios'),
   MenuDos()
 
@@ -74,7 +76,7 @@ void _onItemTap(int index){
           ),
       ],
       currentIndex: _selectedIndex,
-      activeColor: Color.fromRGBO(243,61,85,1),
+      activeColor: Color.fromRGBO(59,66,84,1),
       inactiveColor: Color.fromRGBO(128,128,128,1),
       onTap: _onItemTap,
       ),

@@ -135,3 +135,80 @@ class Videovivo{
     
   }
 }
+
+class Programacion{     
+ late FirebaseFirestore firestore;
+  initialiase(){
+    firestore = FirebaseFirestore.instance;
+
+  }
+  Future<List> leer() async{
+    QuerySnapshot querySnapshot;
+    List docs=[];
+    try{
+      querySnapshot = await firestore.collection('programacion').get();
+      if(querySnapshot.docs.isNotEmpty){
+        for(var doc in querySnapshot.docs.toList()){
+          Map a = {
+            "id": doc.id,
+            "titulo": doc['titulo'],
+            "hora": doc['hora'],
+            "descripcion": doc['descripcion'],
+            
+            
+            };
+            docs.add(a);
+
+        }
+        return docs;
+      }
+
+    }catch(e){
+      print(e);
+    }return docs ;
+    
+  }
+}
+
+
+class Videos{     
+ late FirebaseFirestore firestore;
+  initialiase(){
+    firestore = FirebaseFirestore.instance;
+
+  }
+  Future<List> leer(int numero) async{
+    QuerySnapshot querySnapshot;
+    List docs=[];
+
+    try{
+
+      if(numero == 0){
+        querySnapshot = await firestore.collection('videos').get();
+
+      }else{
+        querySnapshot = await firestore.collection('videos').where("categoria", isEqualTo: numero).get();
+      }
+      
+      if(querySnapshot.docs.isNotEmpty){
+        for(var doc in querySnapshot.docs.toList()){
+          Map a = {
+            "id": doc.id,
+            "autor": doc['autor'],
+            "fecha": doc['fecha'],
+            "link": doc['link'],
+            "titulo": doc['titulo'],
+            "categoria": doc['categoria']
+            };
+            docs.add(a);
+
+        }
+        return docs;
+      }
+
+    }catch(e){
+      print(e);
+    }return docs ;
+    
+  }
+}

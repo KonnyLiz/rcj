@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:rcj/pages/anuncios.dart';
 import 'package:rcj/pages/biblia.dart';
 import 'package:rcj/pages/homepage.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ List<Widget> _opcionesMenu = <Widget>[
   HomePage(),
   PredicasPage(),
   BibliaPage(),
-  Text('Anuncios'),
+  Anuncios(),
   MenuDos()
 
 ];

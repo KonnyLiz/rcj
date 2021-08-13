@@ -3,6 +3,7 @@ import 'package:rcj/models/database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:badges/badges.dart';
 import 'package:rcj/pages/videosView.dart';
+import 'package:share/share.dart';
 
 class PredicasPage extends StatefulWidget {
   PredicasPage({Key? key}) : super(key: key);
@@ -172,11 +173,13 @@ void initState(){
                               children: <Widget>[
                                 Align(
                                   alignment: Alignment.topRight,
-                                  child: Badge(
-                                    shape: BadgeShape.square,
-                                    borderRadius: BorderRadius.circular(8),
-                                    badgeContent: Text('NUEVO', style: TextStyle(color: Colors.white, fontFamily: 'NunitoExtraBold')),
-                                    badgeColor: Color.fromRGBO(243,61,85,1),
+                                  child: Container(
+                                    child: IconButton(
+                                      icon: Icon(Icons.share, color: Colors.white, size: 25,),
+                                      onPressed: (){
+                                        Share.share(docs[index]['link'].toString());
+                                      },
+                                      ),
                                   ),
                                 ),
                                 Column(

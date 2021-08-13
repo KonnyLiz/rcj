@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:rcj/models/database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:badges/badges.dart';
+import 'package:rcj/pages/anunciosview.dart';
 import 'package:rcj/pages/videosView.dart';
 
 class anunciosHome extends StatefulWidget {
@@ -61,7 +62,7 @@ void initState(){
                                       onTap: () {
                                       Navigator.of(context).push(
                                         CupertinoPageRoute(
-                                          builder: (context) => videosView(list: docs, index: index),
+                                          builder: (context) => anunciosView(list: docs, index: index),
                                         ),
                                       );
                                     },

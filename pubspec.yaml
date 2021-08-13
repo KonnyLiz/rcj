@@ -31,8 +31,11 @@ dependencies:
   flutter_radio:
   flutter_media_notification: ^1.2.6
   bible: ^0.7.5
-
+  webview_flutter:
   http:
+  url_launcher:
+  share: ^2.0.4
+
 
   
 

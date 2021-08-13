@@ -40,11 +40,17 @@ class _anunciosViewState extends State<anunciosView> {
             ),
 
             Flexible(
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                   child: Text(widget.list[widget.index]['detalle'], style: TextStyle(color: Colors.black, fontFamily: 'Nunitolight', fontSize: 20,)),
-                 ),
+              child: SingleChildScrollView(
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 20),
+                     child: Text(widget.list[widget.index]['detalle'], style: TextStyle(color: Colors.black, fontFamily: 'Nunitolight', fontSize: 20,)),
+                   ),
+              ),
             ),
+            Container(
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(50)),
+              height: 50,
+            )
           ],
         ),
       ),

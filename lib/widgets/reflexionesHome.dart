@@ -3,6 +3,8 @@ import 'package:rcj/models/database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:badges/badges.dart';
 import 'package:rcj/pages/videosView.dart';
+import 'package:share/share.dart';
+
 
 class reflexionesHome extends StatefulWidget {
   reflexionesHome({Key? key}) : super(key: key);
@@ -98,13 +100,18 @@ void initState(){
                                                   children: <Widget>[
                                                     Align(
                                                       alignment: Alignment.topRight,
-                                                      child: Icon(Icons.star, color: Colors.white,)
+                                                      child: IconButton(
+                                                        icon: Icon(Icons.share, color: Colors.white, ),
+                                                        onPressed: (){
+                                                          Share.share(docs[index]['link'].toString());
+                                                        },
+                                                        ),
                                                     ),
                                                     Column(
                                                       crossAxisAlignment: CrossAxisAlignment.start,                                                
                                                       children: <Widget>[                                          
                                                         Text(docs[index]['titulo'], style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'NunitoBold'),),
-                                                        SizedBox(height: 10,),
+                                                        
                                                         Text(docs[index]['autor'], style: TextStyle(color: Colors.white, fontSize: 10, fontFamily: 'NunitoBook'),)
                                                       ],
                                                     )

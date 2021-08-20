@@ -23,12 +23,12 @@ var _url = 'https://lk.wompi.sv/UQrU';
       children: <Widget>[
       GestureDetector(
         onTap: (){
-          //_launchURL(_url);
-          Navigator.of(context).push(
-                        CupertinoPageRoute(
-                          builder: (context) => Donaciones(),
-                        ),
-                      );
+          _launchURL(_url);
+          // Navigator.of(context).push(
+          //               CupertinoPageRoute(
+          //                 builder: (context) => Donaciones(),
+          //               ),
+          //             );
         },
         child: Container(
           

@@ -11,7 +11,7 @@
   </queries>
 
    <application
-        android:label="JosueRadio"
+        android:label="Josue Radio"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         

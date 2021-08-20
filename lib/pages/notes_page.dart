@@ -34,7 +34,8 @@ class _NotesPageState extends State<NotesPage> {
 
     this.notes = await NotesDatabase.instance.readAllNotes();
 
-    setState(() => isLoading = false);
+  setState(() => isLoading = false);
+    
   }
 
   @override
@@ -46,7 +47,7 @@ class _NotesPageState extends State<NotesPage> {
             style: TextStyle(
               fontSize: 24,),
           ),
-          actions: [Icon(Icons.search), SizedBox(width: 12)],
+          
         ),
         body: Center(
           child: isLoading

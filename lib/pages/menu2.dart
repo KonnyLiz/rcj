@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rcj/pages/donaciones.dart';
+import 'package:rcj/pages/notes_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 
@@ -24,11 +25,7 @@ var _url = 'https://lk.wompi.sv/UQrU';
       GestureDetector(
         onTap: (){
           _launchURL(_url);
-          // Navigator.of(context).push(
-          //               CupertinoPageRoute(
-          //                 builder: (context) => Donaciones(),
-          //               ),
-          //             );
+          
         },
         child: Container(
           
@@ -55,29 +52,38 @@ var _url = 'https://lk.wompi.sv/UQrU';
           
         ),
       ),
-      Container(
-        
-        decoration: BoxDecoration(
-          color:  Colors.white,
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: [
-            BoxShadow(
-        color: Colors.grey.withOpacity(0.5),
-        spreadRadius: 5,
-        blurRadius: 7,
-        offset: Offset(0, 3), // changes position of shadow
-      ),
-          ]
-          ),
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(child: Icon(CupertinoIcons.list_number_rtl, color: Color.fromRGBO(59,66,84,1), size: 50,)),
-            SizedBox(height: 8,),
-            Text('NOTAS', style: TextStyle(color: Colors.black, fontFamily: 'NunitoBold', fontSize: 12,))
-          ],),
-        
+      GestureDetector(
+        onTap:(){
+          Navigator.of(context).push(
+                        CupertinoPageRoute(
+                          builder: (context) => NotesPage(),
+                        ),
+                      );
+        } ,
+        child: Container(
+          
+          decoration: BoxDecoration(
+            color:  Colors.white,
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [
+              BoxShadow(
+          color: Colors.grey.withOpacity(0.5),
+          spreadRadius: 5,
+          blurRadius: 7,
+          offset: Offset(0, 3), // changes position of shadow
+        ),
+            ]
+            ),
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(child: Icon(CupertinoIcons.list_number_rtl, color: Color.fromRGBO(59,66,84,1), size: 50,)),
+              SizedBox(height: 8,),
+              Text('NOTAS', style: TextStyle(color: Colors.black, fontFamily: 'NunitoBold', fontSize: 12,))
+            ],),
+          
+        ),
       ),
      
       ],

@@ -4,6 +4,9 @@ import 'dart:async';
 import 'package:flutter_media_notification/flutter_media_notification.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rcj/widgets/programacion.dart';
+import 'package:notification_audio_player/notification_audio_player.dart';
+
+
 
 
 class RadioLive extends StatefulWidget {
@@ -17,7 +20,10 @@ class RadioLive extends StatefulWidget {
 
 
 class _RadioLiveState extends State<RadioLive> {
-bool selected = true;
+NotificationAudioPlayer notificationAudioPlayer = NotificationAudioPlayer();
+
+
+bool selected = false;
 String status = 'hidden';
 
 
@@ -29,23 +35,41 @@ static const streamUrl = "http://enfoquescreativos.com:8010/stream";
   void initState() {
     super.initState();
 
-    MediaNotification.setListener('pause', () {
-      FlutterRadio.playOrPause(url: streamUrl);
+    
+
+  notificationAudioPlayer.onCompleteEvent.listen((event) {
+      print("complete");
+    });
+    notificationAudioPlayer.onResumeEvent.listen((event) {
+      print("resume");
       playingStatus();
-      setState(() => status = 'pause');
+    });
+    notificationAudioPlayer.onPauseEvent.listen((event) {
+      playingStatus();
+      print("pause");
+    });
+    notificationAudioPlayer.onStopEvent.listen((event) {
+      print("stop");
+    });
+    notificationAudioPlayer.switchPreviousEvent.listen((event) {
+      print("switch previous");
+    });
+    notificationAudioPlayer.switchNextEvent.listen((event) {
+      print("swtich next");
+    });
+    notificationAudioPlayer.curPosEvent.listen((data) {
+      print('current position: $data');
+    });
+    notificationAudioPlayer.preparedDurationEvent.listen((data) {
+      print("duration: $data");
+    });
+    notificationAudioPlayer.headPhoneOutEvent.listen((event) {
+      print("headphone out");
+    });
+    notificationAudioPlayer.headPhoneInEvent.listen((event) {
+      print("headphone in");
     });
 
-    MediaNotification.setListener('play', () {
-      FlutterRadio.playOrPause(url: streamUrl);
-      playingStatus();
-      setState(() => status = 'play');
-    });
-
-    MediaNotification.setListener('next', () {});
-
-    MediaNotification.setListener('prev', () {});
-
-    MediaNotification.setListener('select', () {});
     audioStart();
     playingStatus();
   }
@@ -88,14 +112,23 @@ static const streamUrl = "http://enfoquescreativos.com:8010/stream";
                            child: Row(
                              children: [
                                IconButton(
-                                icon: Icon(selected ?  CupertinoIcons.pause_circle: CupertinoIcons.play_circle, 
+                                icon: Icon(selected ?  CupertinoIcons.play_circle:  CupertinoIcons.pause_circle, 
                                 color: Colors.white,
                                 size: 30,),
-                                onPressed: () {
-                                  MediaNotification.showNotification(
-                                  title: 'Estas escuchando', author: 'JosueRadio');
-                                  FlutterRadio.playOrPause(url: streamUrl);
-                                  playingStatus();
+                                onPressed: () async{
+                                    String title = "Estas Escuchando";
+                                            String author = "JoseRadio";
+                                            String avatar = "https://scontent.fsal5-1.fna.fbcdn.net/v/t1.18169-9/13892068_836787956464358_3057000804393912564_n.png?_nc_cat=109&ccb=1-5&_nc_sid=174925&_nc_ohc=IvBvQwU1eWQAX-Wkqdt&_nc_ht=scontent.fsal5-1.fna&oh=b374f1690f0e3f77a70ee2539f76c806&oe=614580DD";
+                                            String url = "http://enfoquescreativos.com:8010/stream";
+                                            print(await notificationAudioPlayer.play(title, author, avatar, url));
+      
+                
+                
+                                  
+                                  // MediaNotification.showNotification(
+                                  // title: 'Estas escuchando', author: 'JosueRadio');
+                                  // FlutterRadio.playOrPause(url: streamUrl);
+                                 playingStatus();
                                 },
                         ),
                              ],
@@ -130,8 +163,7 @@ static const streamUrl = "http://enfoquescreativos.com:8010/stream";
                                   color: Colors.white,
                                 size: 30,),
                                   onPressed: () {
-                                    MediaNotification.showNotification(
-                                    title: 'Estas escuchando', author: 'JosueRadio'); 
+                                    
                                 
                                   },
                         ),
@@ -166,17 +198,41 @@ static const streamUrl = "http://enfoquescreativos.com:8010/stream";
       );
   
   }
-  Future playingStatus() async {
-    bool isP = await FlutterRadio.isPlaying();
-    setState(() {
-      status = 'play';
-      isPlaying = isP;
-      selected = !selected;
-      if(!selected){
-        MediaNotification.hideNotification();
-      }
-    });
+  void playingStatus() {
+
+    
+
+    if(selected == true){
+      
+      
+      setState(() {
+        notificationAudioPlayer.resume();
+        
+        selected = false;
+        
+      });
+    }else{
+      setState(() {
+        notificationAudioPlayer.pause();
+        notificationAudioPlayer.removeNotification();
+        selected = true;
+        
+      });
+    }
+   
+    // setState(() {
+      
+    //   status = 'play';
+    //   selected = !selected;
+      
+      
+    // });
+
+  //  print(notificationAudioPlayer.playerState) ;
   }
+
+  
+
 
   Widget _programacion(){
     return Container(

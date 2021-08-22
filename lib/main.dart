@@ -3,6 +3,9 @@ import 'package:rcj/pages/homepage.dart';
 import 'package:rcj/pages/menu.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
+
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,8 +13,24 @@ void main() async {
   runApp(Myapp());
 }
 
-class Myapp extends StatelessWidget {
 
+class Myapp extends StatefulWidget {
+  Myapp({Key? key}) : super(key: key);
+
+  @override
+  _MyappState createState() => _MyappState();
+}
+
+class _MyappState extends State<Myapp> {
+
+  static final String appid = "e272644d-61c7-4a61-a52d-e6a933012582";
+
+  @override
+  
+  void initState() { 
+    super.initState();
+    initPlatformState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,5 +47,9 @@ class Myapp extends StatelessWidget {
         },
         
     );
+  }
+
+  Future<void> initPlatformState() async{
+    OneSignal.shared.setAppId(appid);
   }
 }

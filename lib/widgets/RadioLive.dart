@@ -71,7 +71,8 @@ static const streamUrl = "http://enfoquescreativos.com:8010/stream";
    
                                         
 });
-  
+
+
 
     
 
@@ -159,8 +160,10 @@ static const streamUrl = "http://enfoquescreativos.com:8010/stream";
                                   if(Platform.isIOS){
                                    
                                
-                                     //FlutterRadio.playOrPause(url: streamUrl);
-                                   Notify();  //localnotification method call below
+                                   FlutterRadio.playOrPause(url: streamUrl);
+                                   Notify();
+                                   playingStatus();
+                                     //localnotification method call below
                    // when user top on notification this listener will work and user will be navigated to notification page
                 
                                    
@@ -290,16 +293,18 @@ static const streamUrl = "http://enfoquescreativos.com:8010/stream";
     );
   }
 
-Future<void> Notify()  async{
+void Notify()  async{
  await AwesomeNotifications().createNotification(
       content: NotificationContent(
         id: 1,
         channelKey: 'basic_channel',
-        title: 'This is Notification title',
-        body: 'This is Body of Noti',
+        title: 'Estas escuchando',
+        body: 'JosueRadio',
         bigPicture: 'https://protocoderspoint.com/wp-content/uploads/2021/05/Monitize-flutter-app-with-google-admob-min-741x486.png',
-        notificationLayout: NotificationLayout.BigPicture
+        notificationLayout: NotificationLayout.MediaPlayer,
+        
       ),
+    
   
   );
 }

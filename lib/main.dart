@@ -4,11 +4,23 @@ import 'package:rcj/pages/menu.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
-
+import 'package:awesome_notifications/awesome_notifications.dart';
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  AwesomeNotifications().initialize(
+      null, // icon for your app notification
+      [
+        NotificationChannel(
+      channelKey: 'basic_channel',
+      channelName: 'Basic Notifications',
+      defaultColor: Colors.teal,
+      importance: NotificationImportance.High,
+      channelShowBadge: true, 
+        )
+      ]
+  );
   await Firebase.initializeApp();
   runApp(Myapp());
 }
@@ -42,7 +54,7 @@ class _MyappState extends State<Myapp> {
       ),
       initialRoute: 'menu',
       routes: {
-        'menu'      : (BuildContext context) => MenuApp(),
+        'menu'      : (BuildContext context) => MenuApp() ,
         
         },
         

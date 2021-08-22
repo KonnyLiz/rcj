@@ -1,12 +1,13 @@
+import 'dart:io';
 import 'package:flutter_radio/flutter_radio.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter_media_notification/flutter_media_notification.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:rcj/pages/menu.dart';
 import 'package:rcj/widgets/programacion.dart';
 import 'package:notification_audio_player/notification_audio_player.dart';
-
-
+import 'package:awesome_notifications/awesome_notifications.dart';
 
 
 class RadioLive extends StatefulWidget {
@@ -23,6 +24,7 @@ class _RadioLiveState extends State<RadioLive> {
 NotificationAudioPlayer notificationAudioPlayer = NotificationAudioPlayer();
 
 
+
 bool selected = false;
 String status = 'hidden';
 
@@ -30,10 +32,46 @@ String status = 'hidden';
 static const streamUrl = "http://enfoquescreativos.com:8010/stream";
 
  late bool isPlaying;
+ 
+  bool _loading = false;
+  bool _isLive = false;
 
  @override
   void initState() {
     super.initState();
+    AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+  if (!isAllowed) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Permitir Notificaciones'),
+        content: Text('Esta app te enviara notificaciones'),
+        actions:[
+          TextButton(
+            onPressed: (){
+              Navigator.pop(context);
+            },
+            child: Text('No permitir', style: TextStyle(color: Colors.grey, fontSize: 18),)
+            ),
+            TextButton(
+            onPressed: ()=>  AwesomeNotifications().requestPermissionToSendNotifications().then((_) => Navigator.pop(context)),
+            child: Text('Permitir', style: TextStyle(color: Colors.green, fontSize: 18,fontWeight: FontWeight.bold),)
+            ),
+
+        ],
+        
+        ),
+
+    );
+    // Insert here your friendly dialog box before call the request method
+    // This is very important to not harm the user experience
+
+  }
+
+   
+                                        
+});
+  
 
     
 
@@ -116,19 +154,31 @@ static const streamUrl = "http://enfoquescreativos.com:8010/stream";
                                 color: Colors.white,
                                 size: 30,),
                                 onPressed: () async{
-                                    String title = "Estas Escuchando";
+                                  
+
+                                  if(Platform.isIOS){
+                                   
+                               
+                                     //FlutterRadio.playOrPause(url: streamUrl);
+                                   Notify();  //localnotification method call below
+                   // when user top on notification this listener will work and user will be navigated to notification page
+                
+                                   
+                                  }else{    String title = "Estas Escuchando";
                                             String author = "JoseRadio";
                                             String avatar = "https://scontent.fsal5-1.fna.fbcdn.net/v/t1.18169-9/13892068_836787956464358_3057000804393912564_n.png?_nc_cat=109&ccb=1-5&_nc_sid=174925&_nc_ohc=IvBvQwU1eWQAX-Wkqdt&_nc_ht=scontent.fsal5-1.fna&oh=b374f1690f0e3f77a70ee2539f76c806&oe=614580DD";
                                             String url = "http://enfoquescreativos.com:8010/stream";
                                             print(await notificationAudioPlayer.play(title, author, avatar, url));
-      
-                
+                                    playingStatus();
+
+                                  }
+                                    
                 
                                   
                                   // MediaNotification.showNotification(
                                   // title: 'Estas escuchando', author: 'JosueRadio');
-                                  // FlutterRadio.playOrPause(url: streamUrl);
-                                 playingStatus();
+                                  
+                                 
                                 },
                         ),
                              ],
@@ -239,5 +289,21 @@ static const streamUrl = "http://enfoquescreativos.com:8010/stream";
       child: programacionLista(),
     );
   }
+
+Future<void> Notify()  async{
+ await AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: 1,
+        channelKey: 'basic_channel',
+        title: 'This is Notification title',
+        body: 'This is Body of Noti',
+        bigPicture: 'https://protocoderspoint.com/wp-content/uploads/2021/05/Monitize-flutter-app-with-google-admob-min-741x486.png',
+        notificationLayout: NotificationLayout.BigPicture
+      ),
+  
+  );
 }
+
+}
+
 

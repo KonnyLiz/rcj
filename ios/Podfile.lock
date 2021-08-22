@@ -212,6 +212,8 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - awesome_notifications (0.0.2):
+    - Flutter
   - BoringSSL-GRPC (0.0.7):
     - BoringSSL-GRPC/Implementation (= 0.0.7)
     - BoringSSL-GRPC/Interface (= 0.0.7)
@@ -269,6 +271,8 @@ PODS:
   - flutter_inappwebview/Core (0.0.1):
     - Flutter
     - OrderedSet (~> 5.0)
+  - flutter_local_notifications (0.0.1):
+    - Flutter
   - flutter_media_notification (0.0.1):
     - Flutter
   - flutter_radio (0.0.1):
@@ -314,6 +318,12 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
+  - notification_audio_player (0.0.1):
+    - Flutter
+  - onesignal_flutter (3.2.0):
+    - Flutter
+    - OneSignalXCFramework (= 3.6.0)
+  - OneSignalXCFramework (3.6.0)
   - OrderedSet (5.0.0)
   - PromisesObjC (2.0.0)
   - share (0.0.1):
@@ -327,13 +337,17 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - awesome_notifications (from `.symlinks/plugins/awesome_notifications/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_database (from `.symlinks/plugins/firebase_database/ios`)
   - Flutter (from `Flutter`)
   - flutter_inappwebview (from `.symlinks/plugins/flutter_inappwebview/ios`)
+  - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - flutter_media_notification (from `.symlinks/plugins/flutter_media_notification/ios`)
   - flutter_radio (from `.symlinks/plugins/flutter_radio/ios`)
+  - notification_audio_player (from `.symlinks/plugins/notification_audio_player/ios`)
+  - onesignal_flutter (from `.symlinks/plugins/onesignal_flutter/ios`)
   - share (from `.symlinks/plugins/share/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
@@ -355,10 +369,13 @@ SPEC REPOS:
     - gRPC-Core
     - leveldb-library
     - nanopb
+    - OneSignalXCFramework
     - OrderedSet
     - PromisesObjC
 
 EXTERNAL SOURCES:
+  awesome_notifications:
+    :path: ".symlinks/plugins/awesome_notifications/ios"
   cloud_firestore:
     :path: ".symlinks/plugins/cloud_firestore/ios"
   firebase_core:
@@ -369,10 +386,16 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_inappwebview:
     :path: ".symlinks/plugins/flutter_inappwebview/ios"
+  flutter_local_notifications:
+    :path: ".symlinks/plugins/flutter_local_notifications/ios"
   flutter_media_notification:
     :path: ".symlinks/plugins/flutter_media_notification/ios"
   flutter_radio:
     :path: ".symlinks/plugins/flutter_radio/ios"
+  notification_audio_player:
+    :path: ".symlinks/plugins/notification_audio_player/ios"
+  onesignal_flutter:
+    :path: ".symlinks/plugins/onesignal_flutter/ios"
   share:
     :path: ".symlinks/plugins/share/ios"
   sqflite:
@@ -384,6 +407,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
+  awesome_notifications: 74462bc8e68b11f8235d78422266886759e9da61
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   cloud_firestore: d6c77e2b33f00576fed2b070fec1be58d7e5f276
   Firebase: 817b9171d0d51dccc458b94a5e8edff6b1dd323d
@@ -395,6 +419,7 @@ SPEC CHECKSUMS:
   FirebaseFirestore: f4f42828c6d82f6945575611c23dd343e0e7d0aa
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   flutter_inappwebview: bfd58618f49dc62f2676de690fc6dcda1d6c3721
+  flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
   flutter_media_notification: b950606ee6c7bc8b1fbecd8ad0f0b5c6f884d781
   flutter_radio: 852f82f0ecb1ea21ce24bc3724e95196c6c7c936
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
@@ -404,6 +429,9 @@ SPEC CHECKSUMS:
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
+  notification_audio_player: eabd3e5722dde2efded7066bd3687879de9d8d4d
+  onesignal_flutter: 367950f701ad3bb25b21c15f3da6a08777f9237b
+  OneSignalXCFramework: ba3a7daeafd11bd6af8dd47e5689870911357d52
   OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   share: 0b2c3e82132f5888bccca3351c504d0003b3b410

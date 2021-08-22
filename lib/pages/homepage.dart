@@ -7,7 +7,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
        debugShowCheckedModeBanner: false,
-      home: DefaultTabController(
+      home:  DefaultTabController(
         length: 2,
         child: Scaffold(
           backgroundColor:  Color.fromRGBO(240,240,240,1),
